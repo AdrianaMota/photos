@@ -27,18 +27,18 @@ export default function Home() {
 	};
 
 	const addCardHandler = () => {
-		// const request = new XMLHttpRequest();
-		// request.open("GET", srcInput, true);
-		// request.send();
-		// request.onload = function () {
-		// 	status = request.status;
-		// 	if (request.status == 404) {
-		// 		//if(statusText == OK)
-		// 		console.log("image exists");
-		// 	} else {
-		// 		console.log("image doesn't exist");
-		// 	}
-		// };
+		const request = new XMLHttpRequest();
+		request.open("GET", srcInput, true);
+		request.send();
+		request.onload = function () {
+			status = request.status;
+			if (request.status == 404) {
+				//if(statusText == OK)
+				console.log("image exists");
+			} else {
+				console.log("image doesn't exist");
+			}
+		};
 
 		const newCards = [...imgList, srcInput];
 		setImgList(newCards);
