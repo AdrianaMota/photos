@@ -11,13 +11,14 @@ import {
 	Button,
 	Flex,
 	Grid,
+	Div,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
-import Masonry from "react-masonry-css";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
+import dynamic from "next/dynamic";
+const Packery = dynamic(() => import("react-packery-component"), {
+	ssr: false,
+});
 export default function Home() {
-	const cards = [];
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
 
@@ -26,18 +27,18 @@ export default function Home() {
 	};
 
 	const addCardHandler = () => {
-		const request = new XMLHttpRequest();
-		request.open("GET", srcInput, true);
-		request.send();
-		request.onload = function () {
-			status = request.status;
-			if (request.status == 404) {
-				//if(statusText == OK)
-				console.log("image exists");
-			} else {
-				console.log("image doesn't exist");
-			}
-		};
+		// const request = new XMLHttpRequest();
+		// request.open("GET", srcInput, true);
+		// request.send();
+		// request.onload = function () {
+		// 	status = request.status;
+		// 	if (request.status == 404) {
+		// 		//if(statusText == OK)
+		// 		console.log("image exists");
+		// 	} else {
+		// 		console.log("image doesn't exist");
+		// 	}
+		// };
 
 		const newCards = [...imgList, srcInput];
 		setImgList(newCards);
@@ -49,13 +50,6 @@ export default function Home() {
 		});
 
 		setImgList(newList);
-	};
-
-	const breakpointColumnsObj = {
-		default: 4,
-		1100: 3,
-		700: 2,
-		500: 1,
 	};
 
 	return (
@@ -114,40 +108,19 @@ export default function Home() {
 					</InputRightElement>
 				</InputGroup>
 			</HStack>
-			<DragDropContext>
-				<Droppable droppableId="cards">
-					{(provided) => (
-						<Masonry
-							breakpointCols={breakpointColumnsObj}
-							className="my-masonry-grid"
-							columnClassName="my-masonry-grid_column"
-							pt="10rem"
-							{...provided.droppableProps}
-							ref={provided.innerRef}
-						>
-							{imgList.map((img, index) => {
-								return (
-									<Draggable draggableId={index} index={index} key={index}>
-										{(provided) => (
-											<Card
-												ref={provided.innerRef}
-												{...provided.draggableProps}
-												{...provided.dragHandleProps}
-												source={img}
-												onRemove={() => {
-													deleteImg(index);
-												}}
-											/>
-										)}
-									</Draggable>
-								);
-							})}
-
-							{provided.placeholder}
-						</Masonry>
-					)}
-				</Droppable>
-			</DragDropContext>
+			<Packery className="grid">
+				{imgList.map((url, index) => {
+					return (
+						<Card
+							index={index}
+							source={url}
+							onRemove={() => {
+								deleteImg(index);
+							}}
+						/>
+					);
+				})}
+			</Packery>
 		</VStack>
 	);
 }
