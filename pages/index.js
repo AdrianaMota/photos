@@ -14,10 +14,7 @@ import {
 	Div,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
-import dynamic from "next/dynamic";
-const Packery = dynamic(() => import("react-packery-component"), {
-	ssr: false,
-});
+import Masonry from "react-masonry-css";
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
@@ -32,17 +29,15 @@ export default function Home() {
 		request.send();
 		request.onload = function () {
 			status = request.status;
-			if (request.status == 404) {
-				//if(statusText == OK)
-				console.log("image exists");
+			if (request.status == 200) {
+				const newCards = [...imgList, srcInput];
+				setImgList(newCards);
+				setSrcInput("");
 			} else {
-				console.log("image doesn't exist");
+				console.log("nooooooo");
+				setSrcInput("");
 			}
 		};
-
-		const newCards = [...imgList, srcInput];
-		setImgList(newCards);
-		setSrcInput("");
 	};
 	const deleteImg = (indexToDelete) => {
 		const newList = imgList.filter((img, currentIndex) => {
@@ -51,7 +46,12 @@ export default function Home() {
 
 		setImgList(newList);
 	};
-
+	const breakpointColumnsObj = {
+		default: 4,
+		1100: 3,
+		700: 2,
+		500: 1,
+	};
 	return (
 		<VStack align="left">
 			<Box
@@ -108,7 +108,12 @@ export default function Home() {
 					</InputRightElement>
 				</InputGroup>
 			</HStack>
-			<Packery className="grid">
+			<Masonry
+				breakpointCols={breakpointColumnsObj}
+				className="my-masonry-grid"
+				columnClassName="my-masonry-grid_column"
+				pt="10rem"
+			>
 				{imgList.map((url, index) => {
 					return (
 						<Card
@@ -120,7 +125,7 @@ export default function Home() {
 						/>
 					);
 				})}
-			</Packery>
+			</Masonry>
 		</VStack>
 	);
 }
