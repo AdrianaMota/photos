@@ -29,12 +29,13 @@ export default function Home() {
 		request.send();
 		request.onload = function () {
 			status = request.status;
-			if (request.status == 200) {
+			//check if link is not from website
+			if (request.onerror) {
 				const newCards = [...imgList, srcInput];
 				setImgList(newCards);
 				setSrcInput("");
 			} else {
-				console.log("nooooooo");
+				// if false turn input red
 				setSrcInput("");
 			}
 		};
