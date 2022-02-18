@@ -18,6 +18,7 @@ import Masonry from "react-masonry-css";
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
+	const [validation, setValidation] = useState("this");
 
 	const handleImgInputChange = (event) => {
 		setSrcInput(event.target.value);
@@ -29,13 +30,16 @@ export default function Home() {
 		request.send();
 		request.onload = function () {
 			status = request.status;
-			//check if link is not from website
-			if (request.onerror) {
+
+			if (request.status == 200) {
 				const newCards = [...imgList, srcInput];
 				setImgList(newCards);
+				console.log("added");
 				setSrcInput("");
+				setValidation("this");
 			} else {
 				// if false turn input red
+				setValidation("false");
 				setSrcInput("");
 			}
 		};
@@ -87,7 +91,7 @@ export default function Home() {
 						fontSize="m"
 						fontWeight="200"
 						variant="flushed"
-						placeholder="Image URL"
+						placeholder={validation}
 						focusBorderColor="dark.500"
 						pb="1rem"
 						mb="2rem"
