@@ -18,7 +18,8 @@ import Masonry from "react-masonry-css";
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
-	const [validation, setValidation] = useState("this");
+	const [inputColor, setInputColor] = useState("dark");
+	const [inputText, setInputText] = useState("Enter Image URL");
 
 	const handleImgInputChange = (event) => {
 		setSrcInput(event.target.value);
@@ -36,10 +37,12 @@ export default function Home() {
 				setImgList(newCards);
 				console.log("added");
 				setSrcInput("");
-				setValidation("this");
+				setInputColor("dark");
+				setInputText("Enter Image URL");
 			} else {
 				// if false turn input red
-				setValidation("false");
+				setInputColor("primaryPink.500");
+				setInputText("Invalid image URL");
 				setSrcInput("");
 			}
 		};
@@ -88,10 +91,11 @@ export default function Home() {
 				</VStack>
 				<InputGroup width="40rem">
 					<Input
+						borderBottomColor={inputColor}
 						fontSize="m"
 						fontWeight="200"
 						variant="flushed"
-						placeholder={validation}
+						placeholder={inputText}
 						focusBorderColor="dark.500"
 						pb="1rem"
 						mb="2rem"
