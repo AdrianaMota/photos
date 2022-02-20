@@ -25,6 +25,18 @@ export default function Home() {
 		setSrcInput(event.target.value);
 	};
 
+	const error = () => {
+		setInputColor("primaryPink.500");
+		setInputText("Invalid image URL");
+		setSrcInput("");
+	};
+
+	const success = () => {
+		setSrcInput("");
+		setInputColor("dark");
+		setInputText("Enter Image URL");
+	};
+
 	const addCardHandler = () => {
 		const request = new XMLHttpRequest();
 		request.open("GET", srcInput, true);
@@ -32,18 +44,12 @@ export default function Home() {
 		request.onload = function () {
 			status = request.status;
 
-			if (request.status == 200) {
+			if (request.status == 200 && srcInput.trim() !== "") {
 				const newCards = [...imgList, srcInput];
 				setImgList(newCards);
-				console.log("added");
-				setSrcInput("");
-				setInputColor("dark");
-				setInputText("Enter Image URL");
+				success();
 			} else {
-				// if false turn input red
-				setInputColor("primaryPink.500");
-				setInputText("Invalid image URL");
-				setSrcInput("");
+				error();
 			}
 		};
 	};
@@ -91,7 +97,13 @@ export default function Home() {
 				</VStack>
 				<InputGroup width="40rem">
 					<Input
+						onKeyPress={(e) => {
+							if (e.key === "Enter") {
+								addCardHandler();
+							}
+						}}
 						borderBottomColor={inputColor}
+						focusBorderColor={inputColor}
 						fontSize="m"
 						fontWeight="200"
 						variant="flushed"
