@@ -1,5 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import defaultTheme from "../utils/theme";
+import "../components/card.css";
 
 import "@fontsource/poppins/300.css";
 import "@fontsource/poppins/400.css";

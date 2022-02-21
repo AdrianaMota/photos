@@ -2,7 +2,7 @@ import { Image, Stack, CloseButton } from "@chakra-ui/react";
 
 export default function Card({ source, onRemove }) {
 	return (
-		<Stack marginTop="2rem">
+		<Stack marginTop="2rem" className="card">
 			<CloseButton
 				right="0"
 				m="1rem 1rem -5rem"
