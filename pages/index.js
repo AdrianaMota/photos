@@ -67,7 +67,7 @@ export default function Home() {
 		500: 1,
 	};
 	return (
-		<VStack align="left">
+		<VStack align="left" margin={{ base: "0 -10rem", lg: "0 -5rem" }}>
 			<Box
 				zIndex="-100000rem"
 				pos="absolute"
@@ -86,8 +86,25 @@ export default function Home() {
 				p="10rem"
 				borderRadius="full"
 			/>
-			<HStack width="full" justifyContent="space-between" alignItems="end">
-				<VStack align="left" zIndex="100" pt="5rem">
+			<Stack
+				width="full"
+				justifyContent="space-between"
+				alignItems={{ base: "start", lg: "end" }}
+				direction={{ base: "column", lg: "row" }}
+			>
+				<VStack
+					align="left"
+					zIndex="100"
+					pt="5rem"
+					m={{ base: "2rem 0", lg: "0" }}
+					fontSize={{
+						base: "4rem",
+						md: "6rem",
+						lg: "5rem",
+						xl: "7rem",
+						"2xl": "xxl",
+					}}
+				>
 					<Text fontWeight="bold" lineHeight="1">
 						Your moodboard
 					</Text>
@@ -95,7 +112,7 @@ export default function Home() {
 						in one place
 					</Text>
 				</VStack>
-				<InputGroup width="40rem">
+				<InputGroup width={{ base: "95%", md: "80%", lg: "500px" }}>
 					<Input
 						onKeyPress={(e) => {
 							if (e.key === "Enter") {
@@ -128,7 +145,7 @@ export default function Home() {
 						</Button>
 					</InputRightElement>
 				</InputGroup>
-			</HStack>
+			</Stack>
 			<Masonry
 				breakpointCols={breakpointColumnsObj}
 				className="my-masonry-grid"
