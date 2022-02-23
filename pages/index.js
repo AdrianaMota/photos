@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
 	Stack,
-	HStack,
 	VStack,
 	Box,
 	Text,
@@ -9,9 +8,6 @@ import {
 	Input,
 	InputRightElement,
 	Button,
-	Flex,
-	Grid,
-	Div,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
 import Masonry from "react-masonry-css";

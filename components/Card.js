@@ -2,18 +2,27 @@ import { Image, Stack, CloseButton } from "@chakra-ui/react";
 
 export default function Card({ source, onRemove }) {
 	return (
-		<Stack marginTop="2rem" className="card">
+		<Stack
+			marginTop="2rem"
+			className="card"
+			position="relative"
+			transition="all 0.5s"
+			_hover={{ transform: "scale(1.1)" }}
+		>
 			<CloseButton
+				position="absolute"
+				background="white"
 				right="0"
-				m="1rem 1rem -5rem"
-				position="relative"
+				borderRadius="full"
+				mt="1.5rem"
+				mr="1rem"
+				_hover={{ background: "white" }}
 				onClick={onRemove}
 			/>
 			<Image
-				width="300rem"
 				borderRadius="0.5rem"
 				src={source}
-				alt="Oops! Image not found"
+				alt="Added image"
 				fontSize="1rem"
 			/>
 		</Stack>
