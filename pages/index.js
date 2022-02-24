@@ -8,6 +8,7 @@ import {
 	Input,
 	InputRightElement,
 	Button,
+	HStack,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
 import Masonry from "react-masonry-css";
@@ -48,6 +49,12 @@ export default function Home() {
 				error();
 			}
 		};
+	};
+	const pasteHandler = () => {
+		setTimeout(async () => {
+			const text = await navigator.clipboard.readText();
+			setSrcInput(text);
+		}, 2000);
 	};
 	const deleteImg = (indexToDelete) => {
 		const newList = imgList.filter((img, currentIndex) => {
@@ -108,39 +115,57 @@ export default function Home() {
 						in one place
 					</Text>
 				</VStack>
-				<InputGroup width={{ base: "95%", md: "80%", lg: "500px" }}>
-					<Input
-						onKeyPress={(e) => {
-							if (e.key === "Enter") {
-								addCardHandler();
-							}
+				<VStack>
+					<InputGroup width={{ base: "95%", md: "80%", lg: "500px" }}>
+						<Input
+							autofocus
+							onKeyPress={(e) => {
+								if (e.key === "Enter") {
+									addCardHandler();
+								}
+							}}
+							borderBottomColor={inputColor}
+							focusBorderColor={inputColor}
+							fontSize="m"
+							fontWeight="200"
+							variant="flushed"
+							placeholder={inputText}
+							focusBorderColor="dark.500"
+							pb="1rem"
+							mb="2rem"
+							onChange={handleImgInputChange}
+							value={srcInput}
+						/>
+						<InputRightElement>
+							<Button
+								colorScheme="dark"
+								p="1.5rem 4rem"
+								fontSize="1.5rem"
+								fontWeight="light"
+								mb="1rem"
+								mr="6rem"
+								onClick={addCardHandler}
+							>
+								Add
+							</Button>
+						</InputRightElement>
+					</InputGroup>
+
+					<Button
+						width={{ base: "95%", md: "80%", lg: "500px" }}
+						onClick={() => {
+							navigator.clipboard.writeText(this.state.textToCopy);
 						}}
-						borderBottomColor={inputColor}
-						focusBorderColor={inputColor}
-						fontSize="m"
-						fontWeight="200"
-						variant="flushed"
-						placeholder={inputText}
-						focusBorderColor="dark.500"
-						pb="1rem"
-						mb="2rem"
-						onChange={handleImgInputChange}
-						value={srcInput}
-					/>
-					<InputRightElement>
-						<Button
-							colorScheme="dark"
-							p="1.5rem 4rem"
-							fontSize="1.5rem"
-							fontWeight="light"
-							mb="1rem"
-							mr="6rem"
-							onClick={addCardHandler}
-						>
-							Add
-						</Button>
-					</InputRightElement>
-				</InputGroup>
+						colorScheme="primaryPink"
+						p="1.5rem 4rem"
+						fontSize="1.5rem"
+						fontWeight="light"
+						m="1rem 6rem"
+						onClick={pasteHandler}
+					>
+						Paste
+					</Button>
+				</VStack>
 			</Stack>
 			<Masonry
 				breakpointCols={breakpointColumnsObj}
