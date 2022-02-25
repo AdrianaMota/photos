@@ -8,10 +8,11 @@ import {
 	Input,
 	InputRightElement,
 	Button,
-	HStack,
+	IconButton,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
 import Masonry from "react-masonry-css";
+import { CopyIcon } from "@chakra-ui/icons";
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
@@ -132,7 +133,7 @@ export default function Home() {
 							placeholder={inputText}
 							focusBorderColor="dark.500"
 							pb="1rem"
-							mb="2rem"
+							mb="1rem"
 							onChange={handleImgInputChange}
 							value={srcInput}
 						/>
@@ -150,18 +151,18 @@ export default function Home() {
 							</Button>
 						</InputRightElement>
 					</InputGroup>
-
 					<Button
-						width={{ base: "95%", md: "80%", lg: "500px" }}
 						onClick={() => {
 							navigator.clipboard.writeText(this.state.textToCopy);
 						}}
 						colorScheme="primaryPink"
-						p="1.5rem 4rem"
+						p="1.5rem"
+						alignSelf="start"
 						fontSize="1.5rem"
 						fontWeight="light"
-						m="1rem 6rem"
+						mb="1rem"
 						onClick={pasteHandler}
+						leftIcon={<CopyIcon />}
 					>
 						Paste
 					</Button>
