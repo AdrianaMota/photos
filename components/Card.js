@@ -7,7 +7,7 @@ export default function Card({ source, onRemove }) {
 			className="card"
 			position="relative"
 			transition="all 0.5s"
-			_hover={{ transform: "scale(1.1)" }}
+			_hover={{ transform: "scale(1.03)" }}
 		>
 			<CloseButton
 				position="absolute"
