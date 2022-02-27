@@ -13,6 +13,16 @@ import {
 import Card from "../components/Card";
 import Masonry from "react-masonry-css";
 import { CopyIcon } from "@chakra-ui/icons";
+import Gallery from "react-photo-gallery";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+
+const SortablePhoto = SortableElement((item) => <Card {...item} />);
+const SortableGallery = SortableContainer(({ items }) => (
+	<Gallery
+		photos={items}
+		renderImage={(props) => <SortablePhoto {...props} />}
+	/>
+));
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
@@ -69,6 +79,10 @@ export default function Home() {
 		1100: 3,
 		700: 2,
 		500: 1,
+	};
+
+	const onSortEnd = ({ oldIndex, newIndex }) => {
+		setItems(arrayMove(items, oldIndex, newIndex));
 	};
 	return (
 		<VStack align="left" margin={{ base: "0 -10rem", lg: "0 -5rem" }}>
@@ -186,6 +200,7 @@ export default function Home() {
 					);
 				})}
 			</Masonry>
+			<SortableGallery items={imgList} onSortEnd={onSortEnd} axis={"xy"} />
 		</VStack>
 	);
 }
