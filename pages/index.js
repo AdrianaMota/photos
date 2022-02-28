@@ -16,6 +16,11 @@ import { CopyIcon } from "@chakra-ui/icons";
 import Gallery from "react-photo-gallery";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
+//Guides for dnd and masonry:
+// https://codesandbox.io/s/8y7n1r9y5j?file=/index.js
+// DnD: https://www.npmjs.com/package/react-sortable-hoc
+// Masonry: http://neptunian.github.io/react-photo-gallery/
+
 const SortablePhoto = SortableElement((item) => <Card {...item} />);
 const SortableGallery = SortableContainer(({ items }) => (
 	<Gallery
