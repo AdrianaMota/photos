@@ -22,9 +22,9 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 // Masonry: http://neptunian.github.io/react-photo-gallery/
 
 const SortablePhoto = SortableElement((item) => <Card {...item} />);
-const SortableGallery = SortableContainer(({ items }) => (
+const SortableGallery = SortableContainer(({ imgList }) => (
 	<Gallery
-		photos={items}
+		photos={imgList}
 		renderImage={(props) => <SortablePhoto {...props} />}
 	/>
 ));
