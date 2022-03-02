@@ -21,13 +21,14 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 // DnD: https://www.npmjs.com/package/react-sortable-hoc
 // Masonry: http://neptunian.github.io/react-photo-gallery/
 
-const SortablePhoto = SortableElement((item) => <Card {...item} />);
-const SortableGallery = SortableContainer(({ imgList }) => (
-	<Gallery
-		photos={imgList}
-		renderImage={(props) => <SortablePhoto {...props} />}
-	/>
-));
+//this is creating a new component
+// const SortablePhoto = SortableElement((item) => <Card {...item} />);
+// const SortableGallery = SortableContainer(({ imgList }) => (
+// 	<Gallery
+// 		photos={imgList}
+// 		renderImage={(props) => <SortablePhoto {...props} />}
+// 	/>
+// ));
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
@@ -205,7 +206,7 @@ export default function Home() {
 					);
 				})}
 			</Masonry>
-			<SortableGallery items={imgList} onSortEnd={onSortEnd} axis={"xy"} />
+			{/* <SortableGallery items={imgList} onSortEnd={onSortEnd} axis={"xy"} /> */}
 		</VStack>
 	);
 }
