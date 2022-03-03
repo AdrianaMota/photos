@@ -67,12 +67,12 @@ export default function Home() {
 			}
 		};
 	};
-	const pasteHandler = () => {
-		setTimeout(async () => {
-			const text = await navigator.clipboard.readText();
-			setSrcInput(text);
-		}, 2000);
+
+	const pasteHandler = async () => {
+		const text = await navigator.clipboard.readText();
+		setSrcInput(text);
 	};
+
 	const deleteImg = (indexToDelete) => {
 		const newList = imgList.filter((img, currentIndex) => {
 			return currentIndex !== indexToDelete;
@@ -80,6 +80,7 @@ export default function Home() {
 
 		setImgList(newList);
 	};
+
 	const breakpointColumnsObj = {
 		default: 4,
 		1100: 3,
