@@ -21,6 +21,8 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 // DnD: https://www.npmjs.com/package/react-sortable-hoc
 // Masonry: http://neptunian.github.io/react-photo-gallery/
 
+// Download picture https://html2canvas.hertzen.com/
+
 //this is creating a new component
 // const SortablePhoto = SortableElement((item) => <Card {...item} />);
 // const SortableGallery = SortableContainer(({ imgList }) => (
@@ -152,7 +154,6 @@ export default function Home() {
 							fontWeight="200"
 							variant="flushed"
 							placeholder={inputText}
-							focusBorderColor="dark.500"
 							pb="1rem"
 							mb="1rem"
 							onChange={handleImgInputChange}
@@ -182,7 +183,6 @@ export default function Home() {
 						fontSize="1.5rem"
 						fontWeight="light"
 						mb="1rem"
-						onClick={pasteHandler}
 						leftIcon={<CopyIcon />}
 					>
 						Paste
