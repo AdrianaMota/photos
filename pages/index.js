@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { createRef, useState } from "react";
+import { useScreenshot } from "use-react-screenshot";
 import {
 	Stack,
 	VStack,
@@ -8,11 +9,13 @@ import {
 	Input,
 	InputRightElement,
 	Button,
+	Image,
 	IconButton,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
 import Masonry from "react-masonry-css";
 import { CopyIcon } from "@chakra-ui/icons";
+import html2canvas from "html2canvas";
 import Gallery from "react-photo-gallery";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
@@ -90,9 +93,16 @@ export default function Home() {
 		500: 1,
 	};
 
-	const onSortEnd = ({ oldIndex, newIndex }) => {
-		setItems(arrayMove(items, oldIndex, newIndex));
+	const ref = createRef(null);
+	const getImage = () => {
+		html2canvas(ref.current).then((canvas) => {
+			document.body.appendChild(canvas);
+		});
 	};
+
+	// const onSortEnd = ({ oldIndex, newIndex }) => {
+	// 	setItems(arrayMove(items, oldIndex, newIndex));
+	// };
 	return (
 		<VStack align="left" margin={{ base: "0 -10rem", lg: "0 -5rem" }}>
 			<Box
@@ -120,6 +130,7 @@ export default function Home() {
 				direction={{ base: "column", lg: "row" }}
 			>
 				<VStack
+					ref={ref}
 					align="left"
 					zIndex="100"
 					pt="5rem"
@@ -142,7 +153,7 @@ export default function Home() {
 				<VStack>
 					<InputGroup width={{ base: "95%", md: "80%", lg: "500px" }}>
 						<Input
-							autofocus
+							autoFocus
 							onKeyPress={(e) => {
 								if (e.key === "Enter") {
 									addCardHandler();
@@ -174,9 +185,7 @@ export default function Home() {
 						</InputRightElement>
 					</InputGroup>
 					<Button
-						onClick={() => {
-							navigator.clipboard.writeText(this.state.textToCopy);
-						}}
+						onClick={pasteHandler}
 						colorScheme="primaryPink"
 						p="1.5rem"
 						alignSelf="start"
@@ -187,26 +196,31 @@ export default function Home() {
 					>
 						Paste
 					</Button>
+					<Button onClick={getImage}>Export</Button>
 				</VStack>
 			</Stack>
-			<Masonry
-				breakpointCols={breakpointColumnsObj}
-				className="my-masonry-grid"
-				columnClassName="my-masonry-grid_column"
-				pt="10rem"
-			>
-				{imgList.map((url, index) => {
-					return (
-						<Card
-							index={index}
-							source={url}
-							onRemove={() => {
-								deleteImg(index);
-							}}
-						/>
-					);
-				})}
-			</Masonry>
+			<Stack>
+				<Masonry
+					breakpointCols={breakpointColumnsObj}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column"
+					pt="10rem"
+				>
+					<div ref={ref}>
+						{imgList.map((url, index) => {
+							return (
+								<Card
+									index={index}
+									source={url}
+									onRemove={() => {
+										deleteImg(index);
+									}}
+								/>
+							);
+						})}
+					</div>
+				</Masonry>
+			</Stack>
 			{/* <SortableGallery items={imgList} onSortEnd={onSortEnd} axis={"xy"} /> */}
 		</VStack>
 	);
