@@ -1950,7 +1950,7 @@ hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-
   dependencies:
     react-is "^16.7.0"
 
-html2canvas@^1.4.1:
+html2canvas@^1.0.0-rc.7, html2canvas@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/html2canvas/-/html2canvas-1.4.1.tgz#7cef1888311b5011d507794a066041b14669a543"
   integrity sha512-fPU6BHNpsyIhr8yyMpTLLxAbkaK8ArIBcmZIRiBLiDhjeqvXolaEmDGmELFuX9I4xDcaKKcJl+TKZLqruBbmWA==
@@ -2661,6 +2661,13 @@ react-remove-scroll@2.4.1:
     tslib "^1.0.0"
     use-callback-ref "^1.2.3"
     use-sidecar "^1.0.1"
+
+react-screen-capture@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-screen-capture/-/react-screen-capture-1.0.1.tgz#fb3aa22857847a565b0f167bfa3466098bcd24a3"
+  integrity sha512-RPaGSC4+pwORiOVNMokQ9w5PSKRP0LhA+lBh2mtdYVVw3phi0UGggeWOyrrOB3mw4CeqmSXjfy1jZOwRadWwow==
+  dependencies:
+    html2canvas "^1.0.0-rc.7"
 
 react-sortable-hoc@^2.0.0:
   version "2.0.0"

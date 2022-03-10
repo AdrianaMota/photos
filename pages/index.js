@@ -16,6 +16,7 @@ import Card from "../components/Card";
 import Masonry from "react-masonry-css";
 import { CopyIcon } from "@chakra-ui/icons";
 import html2canvas from "html2canvas";
+import { ScreenCapture } from "react-screen-capture";
 import Gallery from "react-photo-gallery";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
@@ -92,17 +93,22 @@ export default function Home() {
 		700: 2,
 		500: 1,
 	};
+	const state = {
+		screenCapture: "",
+	};
+	const handleScreenCapture = (screenCapture) => {
+		this.setState({ screenCapture });
+	};
+	const handleSave = () => {
+		const screenCaptureSource = this.state.screenCapture;
+		const downloadLink = document.createElement("a");
+		const fileName = "react-screen-capture.png";
 
-	const ref = createRef(null);
-	const getImage = () => {
-		html2canvas(ref.current).then((canvas) => {
-			document.body.appendChild(canvas);
-		});
+		downloadLink.href = screenCaptureSource;
+		downloadLink.download = fileName;
+		downloadLink.click();
 	};
 
-	// const onSortEnd = ({ oldIndex, newIndex }) => {
-	// 	setItems(arrayMove(items, oldIndex, newIndex));
-	// };
 	return (
 		<VStack align="left" margin={{ base: "0 -10rem", lg: "0 -5rem" }}>
 			<Box
@@ -130,7 +136,6 @@ export default function Home() {
 				direction={{ base: "column", lg: "row" }}
 			>
 				<VStack
-					ref={ref}
 					align="left"
 					zIndex="100"
 					pt="5rem"
@@ -196,31 +201,42 @@ export default function Home() {
 					>
 						Paste
 					</Button>
-					<Button onClick={getImage}>Export</Button>
 				</VStack>
 			</Stack>
-			<Stack>
-				<Masonry
-					breakpointCols={breakpointColumnsObj}
-					className="my-masonry-grid"
-					columnClassName="my-masonry-grid_column"
-					pt="10rem"
-				>
-					<div ref={ref}>
-						{imgList.map((url, index) => {
-							return (
-								<Card
-									index={index}
-									source={url}
-									onRemove={() => {
-										deleteImg(index);
-									}}
-								/>
-							);
-						})}
+			<ScreenCapture onEndCapture={this.handleScreenCapture}>
+				const {screenCapture} = this.state
+				{({ onStartCapture }) => (
+					<div>
+						<Masonry
+							breakpointCols={breakpointColumnsObj}
+							className="my-masonry-grid"
+							columnClassName="my-masonry-grid_column"
+							pt="10rem"
+						>
+							{imgList.map((url, index) => {
+								return (
+									<Card
+										index={index}
+										source={url}
+										onRemove={() => {
+											deleteImg(index);
+										}}
+									/>
+								);
+							})}
+						</Masonry>
+						<center>
+							<img src={screenCapture} alt="react-screen-capture" />
+							<p>
+								{screenCapture && (
+									<button onClick={this.handleSave}>Download</button>
+								)}
+							</p>
+						</center>
+						<Button onClick={onStartCapture}>Caputre</Button>
 					</div>
-				</Masonry>
-			</Stack>
+				)}
+			</ScreenCapture>
 			{/* <SortableGallery items={imgList} onSortEnd={onSortEnd} axis={"xy"} /> */}
 		</VStack>
 	);
