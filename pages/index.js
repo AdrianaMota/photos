@@ -27,14 +27,6 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 
 // Download picture https://html2canvas.hertzen.com/
 
-//this is creating a new component
-// const SortablePhoto = SortableElement((item) => <Card {...item} />);
-// const SortableGallery = SortableContainer(({ imgList }) => (
-// 	<Gallery
-// 		photos={imgList}
-// 		renderImage={(props) => <SortablePhoto {...props} />}
-// 	/>
-// ));
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
 	const [imgList, setImgList] = useState([]);
@@ -237,7 +229,6 @@ export default function Home() {
 					</div>
 				)}
 			</ScreenCapture>
-			{/* <SortableGallery items={imgList} onSortEnd={onSortEnd} axis={"xy"} /> */}
 		</VStack>
 	);
 }
