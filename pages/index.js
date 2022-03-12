@@ -26,6 +26,7 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 // Masonry: http://neptunian.github.io/react-photo-gallery/
 
 // Download picture https://html2canvas.hertzen.com/
+// handle screen capture https://www.npmjs.com/package/react-screen-capture
 
 export default function Home() {
 	const [srcInput, setSrcInput] = useState("");
@@ -88,7 +89,7 @@ export default function Home() {
 	const state = {
 		screenCapture: "",
 	};
-	const handleScreenCapture = (screenCapture) => {
+	handleScreenCapture = (screenCapture) => {
 		this.setState({ screenCapture });
 	};
 	const handleSave = () => {
