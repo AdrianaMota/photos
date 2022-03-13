@@ -89,7 +89,7 @@ export default function Home() {
 	const state = {
 		screenCapture: "",
 	};
-	handleScreenCapture = (screenCapture) => {
+	const handleScreenCapture = (screenCapture) => {
 		this.setState({ screenCapture });
 	};
 	const handleSave = () => {
@@ -196,8 +196,8 @@ export default function Home() {
 					</Button>
 				</VStack>
 			</Stack>
-			<ScreenCapture onEndCapture={this.handleScreenCapture}>
-				const {screenCapture} = this.state
+			<ScreenCapture onEndCapture={handleScreenCapture}>
+				{({ screenCapture }) => state}
 				{({ onStartCapture }) => (
 					<div>
 						<Masonry
@@ -222,7 +222,7 @@ export default function Home() {
 							<img src={screenCapture} alt="react-screen-capture" />
 							<p>
 								{screenCapture && (
-									<button onClick={this.handleSave}>Download</button>
+									<button onClick={handleSave}>Download</button>
 								)}
 							</p>
 						</center>
