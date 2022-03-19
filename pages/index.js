@@ -8,8 +8,6 @@ import {
 	Input,
 	InputRightElement,
 	Button,
-	Image,
-	IconButton,
 } from "@chakra-ui/react";
 import Card from "../components/Card";
 import Masonry from "react-masonry-css";
