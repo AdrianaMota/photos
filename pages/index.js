@@ -24,7 +24,7 @@ export default function Home() {
 	};
 
 	const error = () => {
-		setInputColor("primaryPink.500");
+		setInputColor("red");
 		setInputText("Invalid image URL");
 		setSrcInput("");
 	};
@@ -82,7 +82,7 @@ export default function Home() {
 				pos="absolute"
 				top="6rem"
 				left="7rem"
-				bg="primaryPink.500"
+				bg="primaryPink.300"
 				p="5rem"
 				borderRadius="full"
 			/>
@@ -91,12 +91,13 @@ export default function Home() {
 				top="-7rem"
 				right="0"
 				overflow="clip"
-				bg="primaryPink.500"
+				bg="primaryPink.300"
 				p="10rem"
 				borderRadius="full"
 			/>
 			<Stack
 				width="full"
+				pb="6rem"
 				justifyContent="space-between"
 				alignItems={{ base: "start", lg: "end" }}
 				direction={{ base: "column", lg: "row" }}
@@ -117,7 +118,7 @@ export default function Home() {
 					<Text fontWeight="bold" lineHeight="1">
 						Your moodboard
 					</Text>
-					<Text fontWeight="bold" color="primaryPink.500">
+					<Text fontWeight="normal" color="primaryPink.500">
 						in one place
 					</Text>
 				</VStack>
@@ -137,6 +138,7 @@ export default function Home() {
 							variant="flushed"
 							placeholder={inputText}
 							pb="1rem"
+							pr="9rem"
 							mb="1rem"
 							onChange={handleImgInputChange}
 							value={srcInput}
