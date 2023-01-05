@@ -12,11 +12,12 @@ export default function Card({ source, onRemove }) {
 			<CloseButton
 				position="absolute"
 				background="white"
+				opacity={"0.7"}
 				right="0"
 				borderRadius="full"
 				mt="1.5rem"
 				mr="1rem"
-				_hover={{ background: "white" }}
+				_hover={{ background: "white", opacity: "0.9" }}
 				onClick={onRemove}
 			/>
 			<Image
