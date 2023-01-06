@@ -20,12 +20,7 @@ export default function Card({ source, onRemove }) {
 				_hover={{ background: "white", opacity: "0.9" }}
 				onClick={onRemove}
 			/>
-			<Image
-				borderRadius="0.5rem"
-				src={source}
-				alt="Added image"
-				fontSize="1rem"
-			/>
+			<Image borderRadius="0.5rem" src={source} fontSize="1rem" />
 		</Stack>
 	);
 }
