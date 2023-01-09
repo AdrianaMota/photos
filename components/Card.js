@@ -17,7 +17,7 @@ export default function Card({ source, onRemove }) {
 				borderRadius="full"
 				mt="1.5rem"
 				mr="1rem"
-				_hover={{ background: "white", opacity: "0.9" }}
+				_hover={{ background: "white", opacity: "0.85" }}
 				onClick={onRemove}
 			/>
 			<Image borderRadius="0.5rem" src={source} fontSize="1rem" />
