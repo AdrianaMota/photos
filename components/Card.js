@@ -7,17 +7,22 @@ export default function Card({ source, onRemove }) {
 			className="card"
 			position="relative"
 			transition="all 0.5s"
-			_hover={{ transform: "scale(1.03)" }}
+			_hover={{
+				transform: "scale(1.03)",
+				"& > button": {
+					opacity: "0.7",
+				},
+			}}
 		>
 			<CloseButton
 				position="absolute"
 				background="white"
-				opacity={"0.7"}
+				opacity={"0"}
 				right="0"
 				borderRadius="full"
 				mt="1.5rem"
 				mr="1rem"
-				_hover={{ background: "white", opacity: "0.85" }}
+				_hover={{ opacity: "0.85 !important" }}
 				onClick={onRemove}
 			/>
 			<Image borderRadius="0.5rem" src={source} fontSize="1rem" />
