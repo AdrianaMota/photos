@@ -74,7 +74,7 @@ export default function Home() {
 	const state = {
 		screenCapture: "",
 	};
-
+	//add drop images from computer feature
 	return (
 		<VStack align="left" margin={{ base: "0 -10rem", lg: "0 -5rem" }}>
 			<Box
